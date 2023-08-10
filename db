@@ -6,6 +6,7 @@ create table "user"(
     age int not null check ( age> 0),
     password varchar not null,
     type int not null
+
     );
 create table category(
     id serial primary key,
