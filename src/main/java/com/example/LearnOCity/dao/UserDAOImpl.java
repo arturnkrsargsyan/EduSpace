@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
-    private static final String INSERT_QUERY = "insert into user(username, age, password, type) VALUES (?,?,?,?)";
+    private static final String INSERT_QUERY = "insert into user(username, age, password, type) VALUES (?,?,?,?) returning id";
     private static final String GET_BY_USERNAME_QUERY = "select * from user where username=?";
     private Connection connection;
 
@@ -19,9 +19,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void save(User user) {
+    public int save(User user) {
         try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY)) {
+
             this.enrichStatement(user, statement);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("id");
         } catch (SQLException e) {
             throw new RuntimeException();
         }

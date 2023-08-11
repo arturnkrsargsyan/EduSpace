@@ -21,7 +21,10 @@ public class UserServiceImpl implements UserService {
     public ResultDTO save(User user) {
         ResultDTO resultDTO = new ResultDTO();
         resultDTO.setValidations(userValidation.validate(user));
-        userDAO.save(user);
+        if (resultDTO.getValidations().isEmpty()) {
+            resultDTO.setSuccess(true);
+            user.setId(userDAO.save(user));
+        }
         return resultDTO;
     }
 

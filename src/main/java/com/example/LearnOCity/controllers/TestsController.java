@@ -12,7 +12,6 @@ import java.util.Map;
 public class TestsController {
     @GetMapping
     public List<TestDTO> getAll(){
-        
         return null;
     }
     @PostMapping("/{id}/check")

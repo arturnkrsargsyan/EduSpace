@@ -7,5 +7,5 @@ import java.util.List;
 public interface UserDAO {
     User getByUsername(String username);
 
-    void save(User user);
+    int save(User user);
 }

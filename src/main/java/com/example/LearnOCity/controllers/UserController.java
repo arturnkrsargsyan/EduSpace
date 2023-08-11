@@ -31,15 +31,11 @@ public class UserController {
 
     @PostMapping("/registration")
     public ResultDTO signUp(@RequestBody UserDTO userDTO) {
-        ResultDTO resultDTO = new ResultDTO();
-        User user = convertToUser(userDTO);
-        userService.save(user);
-        return null;
+        return userService.save(convertToUser(userDTO));
     }
 
     private User convertToUser(UserDTO userDTO) {
-        modelMapper.map(userDTO, User.class);
-        return null;
+        return modelMapper.map(userDTO, User.class);
     }
 
 

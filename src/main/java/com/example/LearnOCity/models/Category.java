@@ -7,6 +7,8 @@ public class Category {
     private String name;
     private List<Test> tests;// TODO signUp form doesn't need it (for future case )
 
+    public Category(){}
+
 
     public Category(Integer id, String name, List<Test> tests) {
         this.id = id;
