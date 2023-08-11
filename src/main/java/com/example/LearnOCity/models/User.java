@@ -1,27 +1,25 @@
 package com.example.LearnOCity.models;
 
 public class User {
-    private int id;
+    private Integer id;
     private String username;
-    private int age;
+    private Integer age;
     private String password;
-    private int type;
-    private int category;
-    public User(){}
+    private Integer type; //TODO Integer -> enumName
 
-    public User(String username, int age, String password, int type,int category) {
+
+    public User(String username, Integer age, String password, Integer type) {
         this.username = username;
         this.age = age;
         this.password = password;
         this.type = type;
-        this.category = category;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -33,11 +31,11 @@ public class User {
         this.username = username;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -49,19 +47,11 @@ public class User {
         this.password = password;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
-    }
-
-    public int getCategory() {
-        return category;
-    }
-
-    public void setCategory(int category) {
-        this.category = category;
     }
 }
