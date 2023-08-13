@@ -8,11 +8,11 @@ public class Question {
     private Integer testId;
     private String question;
     private Map<Integer, String> answers;//TODO LIST -> MAP
-    private int rightAnswersNumber;
+    private Integer rightAnswersNumber;//TODO in case if we get random questions this filed should null
     private double mark;
     private Long createdAt;
 
-    public Question(Integer testId, String question, Map<Integer, String> answers, int rightAnswersNumber, double mark, Long createdAt) {
+    public Question(Integer testId, String question, Map<Integer, String> answers, Integer rightAnswersNumber, double mark, Long createdAt) {
         this.testId = testId;
         this.question = question;
         this.answers = answers;
@@ -53,11 +53,11 @@ public class Question {
         this.answers = answers;
     }
 
-    public int getRightAnswersNumber() {
+    public Integer getRightAnswersNumber() {
         return rightAnswersNumber;
     }
 
-    public void setRightAnswersNumber(int rightAnswersNumber) {
+    public void setRightAnswersNumber(Integer rightAnswersNumber) {
         this.rightAnswersNumber = rightAnswersNumber;
     }
 

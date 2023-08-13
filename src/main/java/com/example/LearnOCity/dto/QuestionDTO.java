@@ -7,7 +7,7 @@ public class QuestionDTO {
     private Integer testId;
     private String question;
     private Map<Integer, String> answers;//TODO LIST -> MAP
-    private int rightAnswersNumber;
+    private Integer rightAnswersNumber;//TODO in case if we get random questions this filed should null
     private double mark;
 
     private Long createdAt;

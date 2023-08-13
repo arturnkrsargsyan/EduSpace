@@ -1,8 +1,8 @@
 package com.example.LearnOCity.config;
 
 import com.example.LearnOCity.dao.*;
-import com.example.LearnOCity.services.UserService;
 import com.example.LearnOCity.validations.StatisticValidation;
+import com.example.LearnOCity.validations.TestValidation;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -32,5 +32,15 @@ public class SpringConfig {
     @Bean
     public StatisticValidation statisticValidation() {
         return new StatisticValidation();
+    }
+
+    @Bean
+    public TestDAO testDAO() {
+        return new TestDAOImpl();
+    }
+
+    @Bean
+    public TestValidation testValidation() {
+        return new TestValidation();
     }
 }
