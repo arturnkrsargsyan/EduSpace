@@ -1,6 +1,9 @@
 package com.example.LearnOCity.controllers;
 
-import com.example.LearnOCity.dto.*;
+import com.example.LearnOCity.dto.QuestionDTO;
+import com.example.LearnOCity.dto.ResultDTO;
+import com.example.LearnOCity.dto.TestAnswerCheckDTO;
+import com.example.LearnOCity.dto.TestDTO;
 import com.example.LearnOCity.models.Question;
 import com.example.LearnOCity.models.Test;
 import com.example.LearnOCity.services.TestService;
@@ -27,9 +30,10 @@ public class TestsController {
     public List<TestDTO> getAll() {
         return this.testService.getAll().stream().map(this::convertToTestDTO).collect(Collectors.toList());
     }
+
     @PostMapping("/{id}/check")
     public List<TestAnswerCheckDTO> check(@PathVariable("id") int id, @RequestBody Map<Integer, Integer> list) {
-        return null;
+        return testService.check(id, list);
     }
 
     @GetMapping("/{id}/by-criteria")
@@ -45,10 +49,12 @@ public class TestsController {
     private Test convertDtoToTest(TestDTO testDTO) {
         return modelMapper.map(testDTO, Test.class);
     }
+
     private QuestionDTO convertDtoToQuestions(Question question) {
         return modelMapper.map(question, QuestionDTO.class);
     }
-    private TestDTO convertToTestDTO(Test test){
-        return modelMapper.map(test,TestDTO.class);
+
+    private TestDTO convertToTestDTO(Test test) {
+        return modelMapper.map(test, TestDTO.class);
     }
 }

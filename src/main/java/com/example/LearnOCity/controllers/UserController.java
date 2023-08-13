@@ -31,7 +31,7 @@ public class UserController {
 
     @PostMapping("/registration")
     public ResultDTO signUp(@RequestBody UserDTO userDTO) {
-        return userService.save(convertToUser(userDTO));
+        return userService.registration(convertToUser(userDTO));
     }
 
     private User convertToUser(UserDTO userDTO) {

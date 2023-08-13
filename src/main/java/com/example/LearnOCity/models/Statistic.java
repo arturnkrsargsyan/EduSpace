@@ -1,7 +1,5 @@
 package com.example.LearnOCity.models;
 
-import java.util.List;
-
 public class Statistic {
     private Integer id;
     private Integer studentId;

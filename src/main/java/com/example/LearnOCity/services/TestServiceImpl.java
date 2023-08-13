@@ -8,10 +8,7 @@ import com.example.LearnOCity.models.Test;
 import com.example.LearnOCity.validations.TestValidation;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class TestServiceImpl implements TestService {
@@ -47,6 +44,15 @@ public class TestServiceImpl implements TestService {
             int randomIndex = rand.nextInt(questionList.size());
             list.add(questionList.get(randomIndex));
             questionList.remove(randomIndex);
+        }
+        Map<Integer, String> map = new HashMap<>();
+        for (int i = 0; i < list.size(); i++) {
+            List<Integer> keys = new ArrayList<>(list.get(i).getAnswers().keySet());
+            Collections.shuffle(keys);
+            for (int j = 0; j < keys.size(); j++) {
+                map.put(keys.get(j), map.get(keys.get(j)));
+            }
+            list.get(i).setAnswers(map);
         }
         return list;
     }

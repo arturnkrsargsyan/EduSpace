@@ -4,12 +4,13 @@ import com.example.LearnOCity.models.Question;
 import com.example.LearnOCity.models.Test;
 import com.example.LearnOCity.util.ConnectionUtil;
 
-import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TestDAOImpl implements TestDAO {
     private final String INSERT_TEST_QUERY = "insert into test(image,description,userId,categoryId) values (?,?,?,?) returning id";

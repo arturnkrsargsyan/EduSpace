@@ -1,16 +1,11 @@
 package com.example.LearnOCity.dao;
 
-import com.example.LearnOCity.dto.QuestionDTO;
-import com.example.LearnOCity.models.Question;
 import com.example.LearnOCity.models.User;
 import com.example.LearnOCity.util.ConnectionUtil;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
     private static final String INSERT_QUERY = "insert into user(username, age, password, type) VALUES (?,?,?,?) returning id";
