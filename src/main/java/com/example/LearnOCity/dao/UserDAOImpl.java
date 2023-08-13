@@ -1,5 +1,7 @@
 package com.example.LearnOCity.dao;
 
+import com.example.LearnOCity.dto.QuestionDTO;
+import com.example.LearnOCity.models.Question;
 import com.example.LearnOCity.models.User;
 import com.example.LearnOCity.util.ConnectionUtil;
 
@@ -7,21 +9,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
     private static final String INSERT_QUERY = "insert into user(username, age, password, type) VALUES (?,?,?,?) returning id";
     private static final String GET_BY_USERNAME_QUERY = "select * from user where username=?";
-    private Connection connection;
+    private static final String GET_BY_ID_QUERY = "select * from user where id=?";
 
-    public UserDAOImpl() {
-        this.connection = ConnectionUtil.getConnection();
-    }
 
     @Override
     public int save(User user) {
-        try (PreparedStatement statement = connection.prepareStatement(INSERT_QUERY)) {
-
+        try (PreparedStatement statement = ConnectionUtil.getConnection().prepareStatement(INSERT_QUERY)) {
             this.enrichStatement(user, statement);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -32,9 +31,22 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public User getById(int id) {
+        User user = new User();
+        ResultSet resultSet;
+        try (PreparedStatement statement = ConnectionUtil.getConnection().prepareStatement(GET_BY_ID_QUERY)) {
+            resultSet = statement.executeQuery();
+            enrichUser(user, resultSet);
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+        return user;
+    }
+
+    @Override
     public User getByUsername(String username) {
         User user = new User();
-        try (PreparedStatement statement = connection.prepareStatement(GET_BY_USERNAME_QUERY)) {
+        try (PreparedStatement statement = ConnectionUtil.getConnection().prepareStatement(GET_BY_USERNAME_QUERY)) {
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
             enrichUser(user, resultSet);
@@ -47,12 +59,11 @@ public class UserDAOImpl implements UserDAO {
     private void enrichUser(User user, ResultSet resultSet) {
         try {
             resultSet.next();
-            user.setId(resultSet.getInt(1));
-            user.setUsername(resultSet.getString(2));
-            user.setAge(resultSet.getInt(3));
-            user.setPassword(resultSet.getString(4));
-            user.setType(resultSet.getInt(5));
-            user.setCategory(resultSet.getInt(6));
+            user.setId(resultSet.getInt("id"));
+            user.setUsername(resultSet.getString("username"));
+            user.setAge(resultSet.getInt("age"));
+            user.setPassword(resultSet.getString("password"));
+            user.setType(resultSet.getInt("type"));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

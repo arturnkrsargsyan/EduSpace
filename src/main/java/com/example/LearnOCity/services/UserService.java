@@ -11,4 +11,5 @@ public interface UserService {
 
     ResultDTO save(User user);
     User getByUsername(String username);
+    User getById(int id);
 }

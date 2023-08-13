@@ -1,17 +1,18 @@
 package com.example.LearnOCity.models;
 
 import java.util.List;
+import java.util.Map;
 
 public class Question {
     private Integer id;
     private Integer testId;
     private String question;
-    private List<String> answers;//TODO LIST -> MAP
+    private Map<Integer, String> answers;//TODO LIST -> MAP
     private int rightAnswersNumber;
     private double mark;
     private Long createdAt;
 
-    public Question(Integer testId, String question, List<String> answers, int rightAnswersNumber, double mark, Long createdAt) {
+    public Question(Integer testId, String question, Map<Integer, String> answers, int rightAnswersNumber, double mark, Long createdAt) {
         this.testId = testId;
         this.question = question;
         this.answers = answers;
@@ -44,11 +45,11 @@ public class Question {
         this.question = question;
     }
 
-    public List<String> getAnswers() {
+    public Map<Integer, String> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(List<String> answers) {
+    public void setAnswers(Map<Integer, String> answers) {
         this.answers = answers;
     }
 

@@ -1,19 +1,36 @@
 package com.example.LearnOCity.config;
 
-import com.example.LearnOCity.dao.UserDAO;
-import com.example.LearnOCity.dao.UserDAOImpl;
+import com.example.LearnOCity.dao.*;
 import com.example.LearnOCity.services.UserService;
+import com.example.LearnOCity.validations.StatisticValidation;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
+
 @SpringBootConfiguration
 public class SpringConfig {
     @Bean
-    public ModelMapper modelMapper(){
+    public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
     @Bean
-    public UserDAO userDAO(){
+    public UserDAO userDAO() {
         return new UserDAOImpl();
+    }
+
+    @Bean
+    public CategoryDAO categoryDAO() {
+        return new CategoryDAOImpl();
+    }
+
+    @Bean
+    public StatisticDAO statisticDAO() {
+        return new StatisticDAOImpl();
+    }
+
+    @Bean
+    public StatisticValidation statisticValidation() {
+        return new StatisticValidation();
     }
 }

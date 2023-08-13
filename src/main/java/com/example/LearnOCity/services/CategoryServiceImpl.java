@@ -4,10 +4,11 @@ import com.example.LearnOCity.dao.CategoryDAO;
 import com.example.LearnOCity.dto.CategoryDTO;
 import com.example.LearnOCity.dto.ResultDTO;
 import com.example.LearnOCity.models.Category;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryDAO categoryDAO;

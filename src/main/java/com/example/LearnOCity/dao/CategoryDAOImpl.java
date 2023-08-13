@@ -40,6 +40,7 @@ public class CategoryDAOImpl implements CategoryDAO {
         }
         return category;
     }
+
     private void enrichCategory(ResultSet resultSet, Category category) {
         try {
             resultSet.next();
@@ -49,5 +50,4 @@ public class CategoryDAOImpl implements CategoryDAO {
             throw new RuntimeException(e);
         }
     }
-
 }

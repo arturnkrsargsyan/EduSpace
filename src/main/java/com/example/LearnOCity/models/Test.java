@@ -4,27 +4,23 @@ import java.util.List;
 
 public class Test {
     private Integer id;
+    private String name;
     private byte[] image;
     private String description;
-    private Integer userId;
+    private Integer ownerID;
     private Integer categoryId;
     private List<Question> questionList;
 
-
-    public List<Question> getQuestionList() {
-        return questionList;
-    }
-
-    public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
-    }
-
-    public Test(byte[] image, String description, Integer userId, Integer categoryId, List<Question> questionList) {
+    public Test(String name, byte[] image, String description, Integer ownerID, Integer categoryId, List<Question> questionList) {
+        this.name = name;
         this.image = image;
         this.description = description;
-        this.userId = userId;
+        this.ownerID = ownerID;
         this.categoryId = categoryId;
         this.questionList = questionList;
+    }
+
+    public Test() {
     }
 
     public Integer getId() {
@@ -33,6 +29,14 @@ public class Test {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public byte[] getImage() {
@@ -51,12 +55,12 @@ public class Test {
         this.description = description;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getOwnerID() {
+        return ownerID;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setOwnerID(Integer ownerID) {
+        this.ownerID = ownerID;
     }
 
     public Integer getCategoryId() {
@@ -65,5 +69,13 @@ public class Test {
 
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public List<Question> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(List<Question> questionList) {
+        this.questionList = questionList;
     }
 }
