@@ -24,9 +24,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<HttpStatus> login(@RequestParam("username") String username,
-                                            @RequestParam("password") String password) {
-        return null;
+    public ResponseEntity<ResultDTO> login(@RequestParam("username") String username,
+                                           @RequestParam("password") String password) {
+        ResultDTO resultDTO = userService.login(username, password);
+        if (resultDTO.isSuccess()) {
+            return ResponseEntity.ok(resultDTO);
+        }else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultDTO);
+        }
     }
 
     @PostMapping("/registration")

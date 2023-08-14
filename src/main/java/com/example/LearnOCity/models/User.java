@@ -21,6 +21,7 @@ public class User {
         this.categories = categories;
     }
 
+
     public Integer getId() {
         return id;
     }

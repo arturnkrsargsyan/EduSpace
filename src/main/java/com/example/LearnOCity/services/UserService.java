@@ -9,4 +9,5 @@ public interface UserService {
     ResultDTO registration(User user);
     User getByUsername(String username);
     User getById(int id);
+    ResultDTO login(String username, String password);
 }

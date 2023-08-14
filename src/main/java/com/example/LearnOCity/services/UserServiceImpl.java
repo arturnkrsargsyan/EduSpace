@@ -6,6 +6,10 @@ import com.example.LearnOCity.models.User;
 import com.example.LearnOCity.validations.UserValidation;
 import org.springframework.stereotype.Service;
 
+import java.awt.*;
+import java.util.Collections;
+import java.util.Objects;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -37,4 +41,21 @@ public class UserServiceImpl implements UserService {
     public User getById(int id) {
         return userDAO.getById(id);
     }
+
+    @Override
+    public ResultDTO login(String username, String password) {
+        ResultDTO resultDTO = new ResultDTO();
+        User user = getByUsername(username);
+        if (!(Objects.equals(user.getPassword(), password))) {
+            resultDTO.setSuccess(false);
+            return resultDTO;
+        }
+        resultDTO.setValidations(userValidation.validateLogin(user, password));
+        if (resultDTO.getValidations().isEmpty()) {
+            resultDTO.setSuccess(true);
+            resultDTO.setNewId(user.getId());
+        }
+        return resultDTO;
+    }
+
 }

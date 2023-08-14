@@ -11,11 +11,15 @@ public class UserDAOImpl implements UserDAO {
     private static final String INSERT_QUERY = "insert into user(username, age, password, type) VALUES (?,?,?,?) returning id";
     private static final String GET_BY_USERNAME_QUERY = "select * from user where username=?";
     private static final String GET_BY_ID_QUERY = "select * from user where id=?";
+    Connection connection;
 
+
+    public UserDAOImpl() {}
 
     @Override
     public int save(User user) {
         try (PreparedStatement statement = ConnectionUtil.getConnection().prepareStatement(INSERT_QUERY)) {
+
             this.enrichStatement(user, statement);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
@@ -41,9 +45,10 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getByUsername(String username) {
         User user = new User();
-        try (PreparedStatement statement = ConnectionUtil.getConnection().prepareStatement(GET_BY_USERNAME_QUERY)) {
+        try (PreparedStatement statement = connection.prepareStatement(GET_BY_USERNAME_QUERY)) {
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
+            user = new User();
             enrichUser(user, resultSet);
         } catch (SQLException e) {
             throw new RuntimeException();

@@ -8,4 +8,6 @@ public interface UserDAO {
     int save(User user);
 
     User getById(int id);
+
+//    boolean checkPassword(String username, String password);
 }

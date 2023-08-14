@@ -5,6 +5,7 @@ import com.example.LearnOCity.services.UserService;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -28,6 +29,18 @@ public class UserValidation implements Validator {
         }
         if (userService.getByUsername(user.getUsername()) != null) {
             validations.add("Username already exist!");
+        }
+        return validations;
+    }
+
+    public List<String> validateLogin(User user, String password) {
+        List<String> validations = new ArrayList<>();
+
+        if (user.getUsername() == null && user.getUsername().isEmpty()) {
+            validations.add("Username does not exist");
+        }
+        if ((user.getPassword() == null && user.getPassword().isEmpty())) {
+            validations.add("Password does not exist");
         }
         return validations;
     }
