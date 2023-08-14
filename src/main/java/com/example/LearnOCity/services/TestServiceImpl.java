@@ -26,8 +26,26 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public List<TestAnswerCheckDTO> check(int id, Map<Integer, Integer> list) {
-        return null;
+    public double check(int testId, Map<Integer, Integer> map) {
+        double overallMark = 0;
+        double mark = 0;
+        List<Question> questionList = testDAO.getQuestionsByTestId(testId);
+        Map<Integer, Question> rightAnswers = new HashMap<>();
+
+        for (Question question : questionList) {
+            if (map.containsKey(question.getId())) {
+                rightAnswers.put(question.getId(), question);
+            }
+        }
+        for (Question question : rightAnswers.values()) {
+            overallMark += question.getMark();
+
+            if (Objects.equals(question.getRightAnswersNumber(), map.get(question.getId()))) {
+                mark += question.getMark();
+            }
+        }
+
+        return mark / overallMark * 100;
     }
 
     @Override

@@ -31,7 +31,7 @@ create table question(
     test_id int references test(id),
     question text not null,
     answers text[] not null ,
-    right_answers_number int not null,
+    right_answer_number int not null,
     mark numeric,
     created_at timestamp not null
 );

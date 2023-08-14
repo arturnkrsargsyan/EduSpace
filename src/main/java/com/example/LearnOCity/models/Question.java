@@ -11,6 +11,9 @@ public class Question {
     private double mark;
     private Long createdAt;
 
+    public Question() {
+    }
+
     public Question(Integer testId, String question, Map<Integer, String> answers, Integer rightAnswersNumber, double mark, Long createdAt) {
         this.testId = testId;
         this.question = question;

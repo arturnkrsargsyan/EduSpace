@@ -17,7 +17,7 @@ public class TestDAOImpl implements TestDAO {
     private final String INSERT_QUESTIONS_QUERY = "insert into questions(testId,question,answers,rightAnswersNumber,mark,createdAt) values (?,?,?,?,?,?)";
     private final String GET_TEST = "select * from test ";
     private final String GET_BY_ID = "select * from test where id=?";
-    private final String GET_BY_QUESTION = "select * from questions where testId=?";
+    private final String GET_QUESTION_BY_TEST_ID = "select * from question where test_id=?;";
 
     public TestDAOImpl() {
     }
@@ -72,6 +72,22 @@ public class TestDAOImpl implements TestDAO {
         return (Test) resultSet;
     }
 
+    @Override
+    public List<Question> getQuestionsByTestId(int id) {
+        Question question = new Question();
+        List<Question> questions = new ArrayList<>();
+        try (PreparedStatement statement = ConnectionUtil.getConnection().prepareStatement(GET_QUESTION_BY_TEST_ID)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                enrichQuestion(resultSet, question);
+                questions.add(question);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+        return questions;
+    }
+
     private void enrichStatementByQuestions(Question question, Test test, PreparedStatement statement) {
         try {
             statement.setInt(1, save(test));
@@ -111,7 +127,7 @@ public class TestDAOImpl implements TestDAO {
 
     private void enrichQuestion(ResultSet resultSet, Question question) {
         try {
-            Map<Integer,String> map=new HashMap<>();
+            Map<Integer, String> map = new HashMap<>();
             String[] answers = (String[]) (resultSet.getArray("answers").getArray());
 
             for (int i = 0, j = 1; i < answers.length; i++, j++) {

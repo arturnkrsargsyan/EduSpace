@@ -12,7 +12,7 @@ public interface TestService {
 
     List<Test> getAll();
 
-    List<TestAnswerCheckDTO> check(int id, Map<Integer, Integer> list);
+    double check(int testId, Map<Integer, Integer> map);
 
     List<Question> getByCount(int id, int count);
 

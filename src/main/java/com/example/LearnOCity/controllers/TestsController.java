@@ -2,7 +2,6 @@ package com.example.LearnOCity.controllers;
 
 import com.example.LearnOCity.dto.QuestionDTO;
 import com.example.LearnOCity.dto.ResultDTO;
-import com.example.LearnOCity.dto.TestAnswerCheckDTO;
 import com.example.LearnOCity.dto.TestDTO;
 import com.example.LearnOCity.models.Question;
 import com.example.LearnOCity.models.Test;
@@ -31,9 +30,9 @@ public class TestsController {
         return this.testService.getAll().stream().map(this::convertToTestDTO).collect(Collectors.toList());
     }
 
-    @PostMapping("/{id}/check")
-    public List<TestAnswerCheckDTO> check(@PathVariable("id") int id, @RequestBody Map<Integer, Integer> list) {
-        return testService.check(id, list);
+    @PostMapping("/{testId}/check")
+    public double check(@PathVariable("testId") int testId, @RequestBody Map<Integer, Integer> map) {
+        return testService.check(testId, map);
     }
 
     @GetMapping("/{id}/by-criteria")
